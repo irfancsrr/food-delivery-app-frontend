@@ -10,9 +10,9 @@ const Footer = () => {
                 <img src={assets.logo} alt="" />
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum in, beatae dolorem non optio cupiditate, quam sunt dicta dolores minima exercitationem ducimus totam aut asperiores inventore harum laudantium. Distinctio, libero.</p>
                 <div className="footer-social-icons">
-                    <img src={assets.facebook_icon} alt="" />
-                    <img src={assets.twitter_icon} alt="" />
-                    <img src={assets.linkedin_icon} alt="" />
+                    <a href="https://www.facebook.com/"><img src={assets.facebook_icon} alt="" /></a>
+                    <a href="http://www.twitter.com/"><img src={assets.twitter_icon} alt="" /></a>
+                    <a href="https://www.linkedin.com/in/irfan-khan-8a9ab4370/"><img src={assets.linkedin_icon} alt="" /></a>
                 </div>
             </div>
             <div className="footer-content-center">
@@ -27,8 +27,8 @@ const Footer = () => {
             <div className="footer-content-right">
                 <h2>GET IN TOUCH</h2>
                 <ul>
-                    <li>+94 765489545</li>
-                    <li>dulanjalisenarathna93@gmail.com</li>
+                    <li>+91 9026507859</li>
+                    <li>irfancsrrsimt@gmail.com</li>
                 </ul>
             </div>
            

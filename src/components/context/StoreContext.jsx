@@ -1,12 +1,14 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import { food_list } from "../../assets/assets";
+// import { food_list } from "../../assets/assets";
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const url = "http://localhost:4000";
   const [token, setToken] = useState("");
+  const [food_list,setFoodList]=useState(null);
+  const [promoAmount,setPromoAmount]=useState(0);
 
   //remove food_list state 
 
@@ -35,7 +37,12 @@ const StoreContextProvider = (props) => {
       );
     }
   };
-
+ const getPromoAmount=async (promo)=>{
+    const response = await axios.get(url + `/api/promo?promocode=${promo}`);
+    if(response.data.success)
+     setPromoAmount(response.data.amount);
+      
+ }
   const getTotalCartAmount = () => {
     let totalAmount = 0;
     for (const item in cartItems) {
@@ -49,6 +56,9 @@ const StoreContextProvider = (props) => {
 
   const fetchFoodList = async () => {
     const response = await axios.get(url + "/api/food/list");
+    if(response.data.success)
+    setFoodList(response.data.data);
+
   };
 
   const loadCartData = async (token) => {
@@ -78,6 +88,8 @@ const StoreContextProvider = (props) => {
     addToCart,
     removeFromCart,
     getTotalCartAmount,
+    getPromoAmount,
+    promoAmount,
     url,
     token,
     setToken,

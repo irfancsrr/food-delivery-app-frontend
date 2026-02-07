@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const PlaceOrder = () => {
-  const {getTotalCartAmount, token, food_list, cartItems, url} = useContext(StoreContext);
+  const {getTotalCartAmount, token, food_list, cartItems,promoAmount, url} = useContext(StoreContext);
 
   const [data, setData] = useState({
     firstName:"",
@@ -38,13 +38,13 @@ const PlaceOrder = () => {
     let orderData = {
       address:data,
       items:orderItems,
-      amount:getTotalCartAmount()+2,
+      amount:getTotalCartAmount()+2-(promoAmount && getTotalCartAmount() > promoAmount ? promoAmount : 0),
     }
 
     let response = await axios.post(url+'/api/order/place', orderData,{headers:{token}})
     if(response.data.success){
-      const {session_url} = response.data;
-      window.location.replace(session_url);
+      // const {session_url} = response.data;
+      window.location.replace('/');
     }
     else{
       alert('Error')
@@ -97,7 +97,7 @@ const PlaceOrder = () => {
             <hr />
             <div className="cart-total-detail">
               <b>Total</b>
-              <b>${getTotalCartAmount()===0?0:getTotalCartAmount()+2}</b>
+              <b>${getTotalCartAmount()===0?0:getTotalCartAmount()+2-(promoAmount && getTotalCartAmount() > promoAmount ? promoAmount : 0)}</b>
             </div> 
           </div>
           <button type='submit'>PROCEED TO PAYMENT</button>
